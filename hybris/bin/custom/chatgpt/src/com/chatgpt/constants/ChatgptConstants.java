@@ -18,4 +18,10 @@ public final class ChatgptConstants extends GeneratedChatgptConstants
 	// implement here constants used by this extension
 
 	public static final String PLATFORM_LOGO_CODE = "chatgptPlatformLogo";
+
+	public static final String NO_CACHE = "no-cache";
+
+	public static final String JSON_UTF_8 = "application/json; charset=utf-8";
+
+	public static final String BEARER = "Bearer ";
 }

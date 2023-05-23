@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.chatgpt.service.ChatgptService;
+import com.chatgpt.client.ChatGPTClient;
 
 
 public class DefaultChatgptService implements ChatgptService
@@ -28,6 +29,9 @@ public class DefaultChatgptService implements ChatgptService
 	private MediaService mediaService;
 	private ModelService modelService;
 	private FlexibleSearchService flexibleSearchService;
+	
+	@Resource(name = "chatGptClient")
+	private ChatGPTClient chatGptClient;
 
 	@Override
 	public String getHybrisLogoUrl(final String logoCode)
@@ -75,6 +79,13 @@ public class DefaultChatgptService implements ChatgptService
 	private InputStream getImageStream()
 	{
 		return DefaultChatgptService.class.getResourceAsStream("/chatgpt/sap-hybris-platform.png");
+	}
+	
+	@Override
+	public void generateProductDescription(final List<ProductModel> products)
+	{
+		// XXX Auto-generated method stub
+
 	}
 
 	@Required

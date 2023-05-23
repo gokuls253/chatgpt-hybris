@@ -82,5 +82,11 @@
         <property name="mediaService" ref="mediaService"/>
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
+	
+	<bean id="chatGptClient" class="com.chatgpt.client.ChatGPTClient">
+		<property name="apiKey" value="${chatgpt.auth.key}"/>
+		<property name="connectionTimeOut" value="#{configurationService.configuration.getProperty('chatgpt.connection.timeout')}"/>
+		<property name="readTimeOut" value="#{configurationService.configuration.getProperty('chatgpt.read.timeout')}"/>
+	</bean>
 			
 </beans>

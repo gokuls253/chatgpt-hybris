@@ -3,9 +3,15 @@
  */
 package com.chatgpt.service;
 
+import de.hybris.platform.core.model.product.ProductModel;
+
+import java.util.List;
+
 public interface ChatgptService
 {
 	String getHybrisLogoUrl(String logoCode);
 
 	void createLogo(String logoCode);
+	
+	void generateProductDescription(List<ProductModel> products);
 }
