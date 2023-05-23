@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "./support/chatgptbackofficewidget-variables.scss";
+
+.yw-labelstyle
+{
+	color: $chatgptbackoffice-label-text-color;
+}
+
+.chatgptbackoffice-container {
+	background: $chatgptbackoffice-container-background;
+	font-family: $chatgptbackoffice-container-font-family;
+	font-size: $chatgptbackoffice-container-font-size;
+}
