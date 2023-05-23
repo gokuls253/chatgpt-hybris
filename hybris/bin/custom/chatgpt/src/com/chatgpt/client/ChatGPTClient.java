@@ -18,7 +18,7 @@ import javax.ws.rs.core.HttpHeaders;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.ai.chatgpt.constants.AifeaturesConstants;
+import com.chatgpt.constants.ChatgptConstants;
 
 
 /**
@@ -97,9 +97,9 @@ public class ChatGPTClient
 			connection.setRequestMethod(method);
 
 			// Add general request properties
-			connection.setRequestProperty(HttpHeaders.AUTHORIZATION, AifeaturesConstants.BEARER + apiKey);
-			connection.setRequestProperty(HttpHeaders.CACHE_CONTROL, AifeaturesConstants.NO_CACHE);
-			connection.setRequestProperty(HttpHeaders.CONTENT_TYPE, AifeaturesConstants.JSON_UTF_8);
+			connection.setRequestProperty(HttpHeaders.AUTHORIZATION, ChatgptConstants.BEARER + apiKey);
+			connection.setRequestProperty(HttpHeaders.CACHE_CONTROL, ChatgptConstants.NO_CACHE);
+			connection.setRequestProperty(HttpHeaders.CONTENT_TYPE, ChatgptConstants.JSON_UTF_8);
 
 			// Enable writing to resource and disable any user interactions
 			connection.setDoOutput(true);
