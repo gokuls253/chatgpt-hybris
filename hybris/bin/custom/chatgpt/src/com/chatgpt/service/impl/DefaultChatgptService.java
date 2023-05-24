@@ -4,8 +4,10 @@
 package com.chatgpt.service.impl;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
+import de.hybris.platform.core.model.ItemModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.exceptions.SystemException;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -13,6 +15,8 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +25,16 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.http.HttpMethod;
 
-import com.chatgpt.service.ChatgptService;
 import com.chatgpt.client.ChatGPTClient;
+import com.chatgpt.constants.ChatgptConstants;
+import com.chatgpt.dto.ChatgptGenerateProductDescriptionRequest;
+import com.chatgpt.dto.ChatgptGenerateProductDescriptionResponse;
+import com.chatgpt.dto.Message;
+import com.chatgpt.service.ChatgptService;
+import com.chatgpt.util.ChatgptPromptHelper;
+import com.google.gson.Gson;
 
 
 
@@ -34,7 +45,10 @@ public class DefaultChatgptService implements ChatgptService
 	private MediaService mediaService;
 	private ModelService modelService;
 	private FlexibleSearchService flexibleSearchService;
-	
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 	@Resource(name = "chatGptClient")
 	private ChatGPTClient chatGptClient;
 
@@ -85,12 +99,57 @@ public class DefaultChatgptService implements ChatgptService
 	{
 		return DefaultChatgptService.class.getResourceAsStream("/chatgpt/sap-hybris-platform.png");
 	}
-	
+
 	@Override
 	public void generateProductDescription(final List<ProductModel> products)
 	{
-		// XXX Auto-generated method stub
+		LOG.debug("Generating Product Description using ChatGPT model | START ");
+		final List<ItemModel> items = new ArrayList<>();
+		for (final ProductModel product : products)
+		{
+			final String productDescriptionRequestJson = generateProductDescriptionRequest(product);
+			final String requestUrl = configurationService.getConfiguration().getString(ChatgptConstants.PRODUCT_DESCRIPTION_API);
+			String productDescriptionResponseJson = chatGptClient.doRequest(String.valueOf(HttpMethod.POST), requestUrl,
+					productDescriptionRequestJson, null);
+			ChatgptGenerateProductDescriptionResponse productDescriptionResponse = new Gson()
+					.fromJson(productDescriptionResponseJson, ChatgptGenerateProductDescriptionResponse.class);
+			if (productDescriptionResponse != null && productDescriptionResponse.getChoices().size() > 0)
+			{
+				LOG.debug("Product description successfully generated using ChatGPT model : Product Code : {}", product.getCode());
+				Message message = productDescriptionResponse.getChoices().get(0).getMessage();
+				if (message != null)
+				{
+					product.setDescription(message.getContent());
+				}
+				items.add(product);
+			}
+			else
+			{
+				LOG.error("Product description failed to generate using ChatGPT model : Product Code : {}", product.getCode());
+			}
 
+		}
+		modelService.saveAll(items);
+		modelService.refresh(items);
+		LOG.debug("Generating Product Description using ChatGPT model | END ");
+	}
+
+	/**
+	 *
+	 */
+	private String generateProductDescriptionRequest(final ProductModel product)
+	{
+		LOG.debug("Populating Product Description ChatGPT API request | START ");
+		final ChatgptGenerateProductDescriptionRequest request = new ChatgptGenerateProductDescriptionRequest();
+		Message message = new Message();
+		message.setRole(ChatgptConstants.CHATGPT_ROLE);
+		message.setContent(ChatgptPromptHelper.generateProductDescriptionPrompt(product));
+		request.setMessages(Arrays.asList(message));
+		request.setMaxTokens(configurationService.getConfiguration().getInt(ChatgptConstants.PRODUCT_DESCRIPTION_MAX_TOKENS));
+		request.setTemperature(configurationService.getConfiguration().getDouble(ChatgptConstants.PRODUCT_DESCRIPTION_TEMPERATURE));
+		request.setModel(configurationService.getConfiguration().getString(ChatgptConstants.PRODUCT_DESCRIPTION_MODEL));
+		LOG.debug("Populating Product Description ChatGPT API request | END ");
+		return new Gson().toJson(request);
 	}
 
 	@Required

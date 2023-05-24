@@ -9,6 +9,7 @@
         
         <requires-extension name="backoffice"/>
                 		
+        <requires-extension name="chatgpt"/>
         
         <!--PLACEHOLDER_FOR_SASS_REGISTRATION-->
                 		
