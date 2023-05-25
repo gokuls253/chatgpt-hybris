@@ -21,7 +21,7 @@ public final class ChatgptPromptHelper
 	private static final Logger LOG = LoggerFactory.getLogger(ChatgptPromptHelper.class);
 
 	//Product Description Prompts
-	private static final String GENERATE_PROD_DESC = "Generate a product description for an e-commerce store.";
+	private static final String GENERATE_PROD_DESC = "Generate a product description with HTML styling tags included as needed for an e-commerce store.";
 	private static final String NEW_LINE = "\n";
 	private static final String PRODUCT_NAME = "Product Name: ";
 	private static final String PRODUCT_CATEGORIES = "Product Categories: ";
