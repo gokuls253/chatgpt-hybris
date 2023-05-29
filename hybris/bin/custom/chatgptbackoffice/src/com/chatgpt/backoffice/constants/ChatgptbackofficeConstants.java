@@ -3,15 +3,18 @@
  */
 package com.chatgpt.backoffice.constants;
 
-@SuppressWarnings({"deprecation","squid:CallToDeprecatedMethod"})
+@SuppressWarnings(
+{ "deprecation", "squid:CallToDeprecatedMethod" })
 public final class ChatgptbackofficeConstants extends GeneratedChatgptbackofficeConstants
 {
 	public static final String EXTENSIONNAME = "chatgptbackoffice";
-	
+
 	private ChatgptbackofficeConstants()
 	{
 		//empty
 	}
-	
-	
+
+	public static final String GENERATE_PRODUCT_DESCRIPTION_SUCCESS = "Product Description Successfully Generated";
+	public static final String GENERATE_PRODUCT_DESCRIPTION_ERROR = "Product Description Generation Failed";
+
 }

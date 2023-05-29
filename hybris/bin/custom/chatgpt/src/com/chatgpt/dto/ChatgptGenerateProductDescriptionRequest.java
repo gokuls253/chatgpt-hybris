@@ -3,15 +3,10 @@
  */
 package com.chatgpt.dto;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -35,10 +30,6 @@ public class ChatgptGenerateProductDescriptionRequest
 
 	@JsonProperty("model")
 	private String model;
-
-	@JsonIgnore
-	@Valid
-	private final Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
 	/**
 	 * No args constructor for use in serialization
@@ -111,18 +102,6 @@ public class ChatgptGenerateProductDescriptionRequest
 	public void setModel(final String model)
 	{
 		this.model = model;
-	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties()
-	{
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(final String name, final Object value)
-	{
-		this.additionalProperties.put(name, value);
 	}
 
 }

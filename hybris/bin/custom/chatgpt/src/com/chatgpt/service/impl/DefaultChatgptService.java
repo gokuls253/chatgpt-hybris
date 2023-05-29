@@ -101,37 +101,42 @@ public class DefaultChatgptService implements ChatgptService
 	}
 
 	@Override
-	public void generateProductDescription(final List<ProductModel> products)
+	public boolean generateProductDescription(final List<ProductModel> products)
 	{
 		LOG.debug("Generating Product Description using ChatGPT model | START ");
 		final List<ItemModel> items = new ArrayList<>();
+		boolean result = false;
 		for (final ProductModel product : products)
 		{
 			final String productDescriptionRequestJson = generateProductDescriptionRequest(product);
 			final String requestUrl = configurationService.getConfiguration().getString(ChatgptConstants.PRODUCT_DESCRIPTION_API);
-			String productDescriptionResponseJson = chatGptClient.doRequest(String.valueOf(HttpMethod.POST), requestUrl,
+			final String productDescriptionResponseJson = chatGptClient.doRequest(String.valueOf(HttpMethod.POST), requestUrl,
 					productDescriptionRequestJson, null);
-			ChatgptGenerateProductDescriptionResponse productDescriptionResponse = new Gson()
+			final ChatgptGenerateProductDescriptionResponse productDescriptionResponse = new Gson()
 					.fromJson(productDescriptionResponseJson, ChatgptGenerateProductDescriptionResponse.class);
-			if (productDescriptionResponse != null && productDescriptionResponse.getChoices().size() > 0)
+			if (productDescriptionResponse != null && productDescriptionResponse.getChoices() != null
+					&& productDescriptionResponse.getChoices().size() > 0)
 			{
 				LOG.debug("Product description successfully generated using ChatGPT model : Product Code : {}", product.getCode());
-				Message message = productDescriptionResponse.getChoices().get(0).getMessage();
+				final Message message = productDescriptionResponse.getChoices().get(0).getMessage();
 				if (message != null)
 				{
 					product.setDescription(message.getContent());
 				}
 				items.add(product);
+				result = true;
 			}
 			else
 			{
 				LOG.error("Product description failed to generate using ChatGPT model : Product Code : {}", product.getCode());
+				result = false;
 			}
 
 		}
 		modelService.saveAll(items);
 		modelService.refresh(items);
 		LOG.debug("Generating Product Description using ChatGPT model | END ");
+		return result;
 	}
 
 	/**
@@ -141,7 +146,7 @@ public class DefaultChatgptService implements ChatgptService
 	{
 		LOG.debug("Populating Product Description ChatGPT API request | START ");
 		final ChatgptGenerateProductDescriptionRequest request = new ChatgptGenerateProductDescriptionRequest();
-		Message message = new Message();
+		final Message message = new Message();
 		message.setRole(ChatgptConstants.CHATGPT_ROLE);
 		message.setContent(ChatgptPromptHelper.generateProductDescriptionPrompt(product));
 		request.setMessages(Arrays.asList(message));

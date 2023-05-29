@@ -2,12 +2,36 @@
 <!--
  Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
 -->
-<config xmlns="http://www.hybris.com/cockpit/config">
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:yc="http://www.hybris.com/cockpitng/config/common"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:cb="http://www.hybris.com/cockpitng/config/collectionbrowser"
+		xmlns:cv="http://www.hybris.com/cockpitng/component/compareview"
+		xmlns:lv="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:et="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:ss="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:as="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+		xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
+		xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+		xmlns:gv="http://www.hybris.com/cockpitng/component/gridView"
+		xmlns:dl="http://www.hybris.com/cockpitng/config/deeplink">
 
 	<!-- chatgptbackoffice UI configuration should be provided here -->
 
 	<!--<context component="component-code" module="chatgptbackoffice">-->
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
+	
+	<context type="Product" component="editorareaactions" merge-by="type" parent="auto">
+		<y:actions>
+			<y:group qualifier="common" position="10">
+				<y:label>actiongroup.common</y:label>
+                <y:action action-id="com.chatgptbackoffice.actions.productdescription" property="currentObject" position="40"/>
+			</y:group>
+		</y:actions>
+	</context>
 
 </config>

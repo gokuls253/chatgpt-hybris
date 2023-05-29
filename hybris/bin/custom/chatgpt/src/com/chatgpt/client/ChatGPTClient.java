@@ -80,7 +80,11 @@ public class ChatGPTClient
 			String url = StringUtils.EMPTY;
 			if (postData != null)
 			{
-				url = String.join(BLANK, postData.toString());
+				url = String.join(BLANK, requestUrl, postData.toString());
+			}
+			else
+			{
+				url = requestUrl;
 			}
 			// Establish connectivity
 			final URL urlObject = new URL(url);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="com.chatgptbackoffice.actions.productdescription"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>Generate Product Description</name>
+    <description>Generate Product Description</description>
+    <author>hybris</author>
+    <version>0.1</version>
+   
+    <actionClassName>com.chatgpt.backoffice.widgets.actions.productdescription.GenerateProductDescriptionAction</actionClassName>
+    <inputType>de.hybris.platform.core.model.product.ProductModel</inputType>
+    <outputType>de.hybris.platform.core.model.product.ProductModel</outputType>
+
+    <iconUri>icons/icon_action_chatgpt_default.png</iconUri>
+
+</action-definition>
