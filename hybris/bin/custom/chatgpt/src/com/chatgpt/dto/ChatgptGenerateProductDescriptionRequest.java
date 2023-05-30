@@ -26,7 +26,9 @@ public class ChatgptGenerateProductDescriptionRequest
 	private Double temperature;
 
 	@JsonProperty("max_tokens")
-	private Integer maxTokens;
+	private Integer max_tokens;
+
+
 
 	@JsonProperty("model")
 	private String model;
@@ -52,7 +54,7 @@ public class ChatgptGenerateProductDescriptionRequest
 		super();
 		this.messages = messages;
 		this.temperature = temperature;
-		this.maxTokens = maxTokens;
+		this.max_tokens = maxTokens;
 		this.model = model;
 	}
 
@@ -80,17 +82,6 @@ public class ChatgptGenerateProductDescriptionRequest
 		this.temperature = temperature;
 	}
 
-	@JsonProperty("max_tokens")
-	public Integer getMaxTokens()
-	{
-		return maxTokens;
-	}
-
-	@JsonProperty("max_tokens")
-	public void setMaxTokens(final Integer maxTokens)
-	{
-		this.maxTokens = maxTokens;
-	}
 
 	@JsonProperty("model")
 	public String getModel()
@@ -102,6 +93,18 @@ public class ChatgptGenerateProductDescriptionRequest
 	public void setModel(final String model)
 	{
 		this.model = model;
+	}
+
+	@JsonProperty("max_tokens")
+	public Integer getMax_tokens()
+	{
+		return max_tokens;
+	}
+
+	@JsonProperty("max_tokens")
+	public void setMax_tokens(Integer max_tokens)
+	{
+		this.max_tokens = max_tokens;
 	}
 
 }

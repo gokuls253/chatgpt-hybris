@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.batik.util.gui.MemoryMonitor.Usage;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

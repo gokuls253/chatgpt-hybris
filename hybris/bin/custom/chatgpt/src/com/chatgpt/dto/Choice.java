@@ -19,8 +19,10 @@ public class Choice
 	@JsonProperty("message")
 	@Valid
 	private Message message;
+
 	@JsonProperty("finish_reason")
 	private String finishReason;
+
 	@JsonProperty("index")
 	private Integer index;
 
