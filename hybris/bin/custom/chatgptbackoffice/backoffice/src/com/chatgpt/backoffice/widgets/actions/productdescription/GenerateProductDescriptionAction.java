@@ -13,12 +13,11 @@ import org.apache.log4j.Logger;
 
 import com.chatgpt.backoffice.constants.ChatgptbackofficeConstants;
 import com.chatgpt.service.ChatgptService;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent.Level;
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
-import com.hybris.cockpitng.util.notifications.NotificationService;
-import com.hybris.cockpitng.util.notifications.event.NotificationEventTypes;
 
 
 /**
@@ -33,7 +32,7 @@ public class GenerateProductDescriptionAction implements CockpitAction<ProductMo
 	@Resource(name = "chatgptService")
 	private ChatgptService chatgptService;
 
-	@Resource
+	@Resource(name = "notificationService")
 	private NotificationService notificationService;
 
 	@Override
@@ -45,21 +44,21 @@ public class GenerateProductDescriptionAction implements CockpitAction<ProductMo
 			final boolean result = chatgptService.generateProductDescription(Arrays.asList(product));
 			if (result)
 			{
-				notificationService.notifyUser(ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_SUCCESS,
-						NotificationEventTypes.EVENT_TYPE_GENERAL, Level.SUCCESS);
-				return new ActionResult<>(ActionResult.SUCCESS);
+				notificationService.notifyUser(notificationService.getWidgetNotificationSource(productActionContext),
+						ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_EVENT, NotificationEvent.Level.SUCCESS);
+				return new ActionResult<ProductModel>(ActionResult.SUCCESS, product);
 			}
 			else
 			{
-				notificationService.notifyUser(ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_ERROR,
-						NotificationEventTypes.EVENT_TYPE_GENERAL, Level.FAILURE);
+				notificationService.notifyUser(notificationService.getWidgetNotificationSource(productActionContext),
+						ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_EVENT, NotificationEvent.Level.FAILURE);
 				return new ActionResult<>(ActionResult.ERROR);
 			}
 		}
 		catch (final Exception exception)
 		{
-			notificationService.notifyUser(ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_ERROR,
-					NotificationEventTypes.EVENT_TYPE_GENERAL, Level.FAILURE);
+			notificationService.notifyUser(notificationService.getWidgetNotificationSource(productActionContext),
+					ChatgptbackofficeConstants.GENERATE_PRODUCT_DESCRIPTION_EVENT, NotificationEvent.Level.FAILURE);
 			return new ActionResult<>(ActionResult.ERROR);
 		}
 	}

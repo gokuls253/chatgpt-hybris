@@ -33,5 +33,22 @@
 			</y:group>
 		</y:actions>
 	</context>
+	
+	<!-- Notification Area-->
+	<context component="notification-area">
+	    <na:notification-area>	        
+	        <na:notifications eventType="chatgpt.generate.product.description.event" level="SUCCESS">
+	            <na:message>generate.product.description.success</na:message>
+	        </na:notifications>
+	   </na:notification-area>
+	</context>
+	
+	<context component="notification-area">
+	    <na:notification-area>	        
+	        <na:notifications eventType="chatgpt.generate.product.description.event" level="FAILURE">
+	            <na:message>generate.product.description.failure</na:message>
+	        </na:notifications>
+	   </na:notification-area>
+	</context>
 
 </config>

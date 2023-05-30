@@ -135,7 +135,7 @@ public class DefaultChatgptService implements ChatgptService
 			if (items.size() > 0)
 			{
 				modelService.saveAll(items);
-				modelService.refresh(items);
+				modelService.refresh(products);
 			}
 			LOG.debug("Generating Product Description using ChatGPT model | END ");
 			return result;

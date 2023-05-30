@@ -14,7 +14,6 @@ public final class ChatgptbackofficeConstants extends GeneratedChatgptbackoffice
 		//empty
 	}
 
-	public static final String GENERATE_PRODUCT_DESCRIPTION_SUCCESS = "Product Description Successfully Generated";
-	public static final String GENERATE_PRODUCT_DESCRIPTION_ERROR = "Product Description Generation Failed";
+	public static final String GENERATE_PRODUCT_DESCRIPTION_EVENT = "chatgpt.generate.product.description.event";
 
 }
