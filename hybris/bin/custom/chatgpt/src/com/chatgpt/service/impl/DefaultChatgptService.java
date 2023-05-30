@@ -4,7 +4,6 @@
 package com.chatgpt.service.impl;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
-import de.hybris.platform.core.model.ItemModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -106,7 +105,7 @@ public class DefaultChatgptService implements ChatgptService
 		try
 		{
 			LOG.debug("Generating Product Description using ChatGPT model | START ");
-			final List<ItemModel> items = new ArrayList<>();
+			final List<ProductModel> items = new ArrayList<>();
 			boolean result = true;
 			for (final ProductModel product : products)
 			{
