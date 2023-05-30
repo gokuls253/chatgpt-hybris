@@ -23,6 +23,7 @@ public final class ChatgptPromptHelper
 	//Product Description Prompts
 	private static final String GENERATE_PROD_DESC = "Generate a product description with HTML styling tags included as needed for an e-commerce store.";
 	private static final String NEW_LINE = "\n";
+	private static final String COMMA = ",";
 	private static final String PRODUCT_NAME = "Product Name: ";
 	private static final String PRODUCT_CATEGORIES = "Product Categories: ";
 	private static final String DESCRIPTION = "Description: ";
@@ -43,10 +44,10 @@ public final class ChatgptPromptHelper
 			categories.append(category.getName()).append(", ");
 		}
 		// Remove the trailing comma
-		categories.deleteCharAt(categories.length() - 1);
+		categories.deleteCharAt(categories.length() - 2);
 
 		StringBuilder prompt = new StringBuilder();
-		prompt.append(GENERATE_PROD_DESC).append(NEW_LINE).append(PRODUCT_NAME).append(productName).append(NEW_LINE)
+		prompt.append(GENERATE_PROD_DESC).append(NEW_LINE).append(PRODUCT_NAME).append(productName).append(COMMA)
 				.append(PRODUCT_CATEGORIES).append(categories.toString()).append(NEW_LINE).append(DESCRIPTION);
 
 		return prompt.toString();
