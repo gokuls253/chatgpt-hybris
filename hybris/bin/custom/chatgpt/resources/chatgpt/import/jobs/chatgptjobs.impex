@@ -1,0 +1,16 @@
+$defaultCurrency=USD
+$defaultLanguage=en
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;chatgptProductDescriptionJob;chatgptProductDescriptionJob
+
+INSERT_UPDATE ChatgptProductDescriptonCronjob;code[unique=true][forceWrite=true];job(code);sessionLanguage(isocode);sessionCurrency(isocode);sessionUser(uid);searchQuery;
+;chatgptProductDescriptionCronJob;chatgptProductDescriptionJob;$defaultLanguage;$defaultCurrency;admin;"SELECT DISTINCT({p.pk}) FROM {
+			Product AS p
+			JOIN CatalogVersion AS cv ON {p.catalogVersion}={cv.pk}
+			JOIN ArticleApprovalStatus AS PAS ON {PAS.pk} = {p.approvalStatus}	
+		}
+		WHERE {cv.version} = 'Online' AND {PAS.code} ='approved' AND {p.code}=''";
+		
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];cronExpression[unique=true];relative;active;maxAcceptableDelay
+;chatgptProductDescriptionCronJob; 0 0 0/4 ? * * *;false;true;-1

@@ -88,5 +88,7 @@
 		<property name="connectionTimeOut" value="#{configurationService.configuration.getProperty('chatgpt.connection.timeout')}"/>
 		<property name="readTimeOut" value="#{configurationService.configuration.getProperty('chatgpt.read.timeout')}"/>
 	</bean>
+	
+	<bean id="chatgptProductDescriptionJob" class="com.chatgpt.jobs.ChatgptProductDescriptionJob" parent="abstractJobPerformable"/>
 			
 </beans>
