@@ -136,6 +136,9 @@ public class DefaultChatgptService implements ChatgptService
 			{
 				modelService.saveAll(items);
 			}
+			items.forEach(item -> {
+				modelService.refresh(item);
+			});
 			LOG.debug("Generating Product Description using ChatGPT model | END ");
 			return result;
 		}

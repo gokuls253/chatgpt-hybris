@@ -10,7 +10,7 @@ INSERT_UPDATE ChatgptProductDescriptonCronjob;code[unique=true][forceWrite=true]
 			JOIN CatalogVersion AS cv ON {p.catalogVersion}={cv.pk}
 			JOIN ArticleApprovalStatus AS PAS ON {PAS.pk} = {p.approvalStatus}	
 		}
-		WHERE {cv.version} = 'Online' AND {PAS.code} ='approved' AND {p.code}=''";
+		WHERE {cv.version} = 'Online' AND {PAS.code} ='approved' AND {p.code}='284533'";
 		
 INSERT_UPDATE Trigger;cronJob(code)[unique=true];cronExpression[unique=true];relative;active;maxAcceptableDelay
 ;chatgptProductDescriptionCronJob; 0 0 0/4 ? * * *;false;true;-1
