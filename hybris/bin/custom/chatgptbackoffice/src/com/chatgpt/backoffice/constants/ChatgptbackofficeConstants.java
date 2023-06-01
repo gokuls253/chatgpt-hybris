@@ -15,5 +15,5 @@ public final class ChatgptbackofficeConstants extends GeneratedChatgptbackoffice
 	}
 
 	public static final String GENERATE_PRODUCT_DESCRIPTION_EVENT = "chatgpt.generate.product.description.event";
-
+	public static final String GENERATE_PRODUCT_DESCRIPTION_LIST_VALIDATION = "chatgpt.generate.product.description.list.validation.event";
 }

@@ -4,11 +4,38 @@
 -->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
-
-    <widget-extension widgetId="backofficeMainSlot">
-        <widget id="chatgptbackoffice-perspective" widgetDefinitionId="com.chatgpt.backoffice.widgets.chatgptbackofficewidget"
-            template="false" slotId="perspectives" title="Hello chatgptbackoffice">
-        </widget>
-    </widget-extension>
+	
+	<widget-extension widgetId="backofficeMainSlot">
+		
+		<widget id="chatgptbackoffice-perspective" widgetDefinitionId="com.chatgpt.backoffice.widgets.chatgptbackofficewidget"
+			template="false" slotId="perspectives" title="Hello chatgptbackoffice"></widget>
+		
+		<widget id="productdescriptionpopup" widgetDefinitionId="com.chatgpt.backoffice.widgets.productdescriptionpopup" slotId="cockpitWidgetChildrenInvisible" template="true">
+			<instance-settings
+				socketEventRoutingMode="LAST_USED">
+				<create onInit="false" reuseExisting="true">
+					<all-incoming-events />
+				</create>
+				<close>
+					<outgoing-events>
+						<socket-event id="productDescriptionJob" />
+					</outgoing-events>
+				</close>
+				<select onInit="false">
+					<all-incoming-events />
+				</select>
+			</instance-settings>
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://chatgptbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<setting key="_width" type="String">500px</setting>
+			<setting key="_height" type="String">auto</setting>
+			<virtual-sockets />
+		</widget>
+		
+	</widget-extension>
+	
+	<widget-connection sourceWidgetId="STUB_com.chatgptbackoffice.actions.productdescriptionlist" outputId="currentProducts" targetWidgetId="productdescriptionpopup" inputId="inputProducts" />
+	<widget-connection sourceWidgetId="productdescriptionpopup" outputId="startedProductDescriptionCronJob" targetWidgetId="processes" inputId="updateCronJob" />
 
 </widgets>
