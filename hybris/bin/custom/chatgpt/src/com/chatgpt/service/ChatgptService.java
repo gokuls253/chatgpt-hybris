@@ -3,6 +3,7 @@
  */
 package com.chatgpt.service;
 
+import de.hybris.platform.core.model.ItemModel;
 import de.hybris.platform.core.model.product.ProductModel;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface ChatgptService
 	void createLogo(String logoCode);
 
 	boolean generateProductDescription(List<ProductModel> products);
+
+	String performProductDescriptionJob(List<ItemModel> items);
 }

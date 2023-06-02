@@ -4,14 +4,18 @@
 package com.chatgpt.service.impl;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
+import de.hybris.platform.core.model.ItemModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.cronjob.CronJobService;
 import de.hybris.platform.servicelayer.exceptions.SystemException;
+import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.user.UserService;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ import com.chatgpt.constants.ChatgptConstants;
 import com.chatgpt.dto.ChatgptGenerateProductDescriptionRequest;
 import com.chatgpt.dto.ChatgptGenerateProductDescriptionResponse;
 import com.chatgpt.dto.Message;
+import com.chatgpt.model.ChatgptProductDescriptonCronjobModel;
 import com.chatgpt.service.ChatgptService;
 import com.chatgpt.util.ChatgptPromptHelper;
 import com.google.gson.Gson;
@@ -45,11 +50,20 @@ public class DefaultChatgptService implements ChatgptService
 	private ModelService modelService;
 	private FlexibleSearchService flexibleSearchService;
 
+	@Resource(name = "userService")
+	private UserService userService;
+
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
 	@Resource(name = "chatGptClient")
 	private ChatGPTClient chatGptClient;
+
+	@Resource(name = "commonI18NService")
+	private CommonI18NService commonI18NService;
+
+	@Resource(name = "cronJobService")
+	private CronJobService cronJobService;
 
 	@Override
 	public String getHybrisLogoUrl(final String logoCode)
@@ -167,6 +181,37 @@ public class DefaultChatgptService implements ChatgptService
 		return new Gson().toJson(request);
 	}
 
+	@Override
+	public String performProductDescriptionJob(List<ItemModel> items)
+	{
+		try
+		{
+			LOG.debug("performProductDescriptionJob | START ");
+			List<ProductModel> products = new ArrayList<>();
+			items.forEach(item -> {
+				if (item instanceof ProductModel)
+				{
+					products.add((ProductModel) item);
+				}
+			});
+			ChatgptProductDescriptonCronjobModel descriptionJob = modelService.create(ChatgptProductDescriptonCronjobModel.class);
+			descriptionJob.setProductsList(products);
+			descriptionJob.setSessionUser(userService.getCurrentUser());
+			descriptionJob.setSessionCurrency(commonI18NService.getCurrentCurrency());
+			descriptionJob.setSessionLanguage(commonI18NService.getCurrentLanguage());
+			modelService.save(descriptionJob);
+			cronJobService.performCronJob(descriptionJob);
+			modelService.refresh(descriptionJob);
+			LOG.debug("performProductDescriptionJob | END ");
+			return descriptionJob.getCode();
+		}
+		catch (Exception ex)
+		{
+			LOG.error("Error during triggering product description cronjob : {}", ex.getMessage());
+			return null;
+		}
+	}
+
 	@Required
 	public void setMediaService(final MediaService mediaService)
 	{
@@ -184,4 +229,6 @@ public class DefaultChatgptService implements ChatgptService
 	{
 		this.flexibleSearchService = flexibleSearchService;
 	}
+
+
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:w="http://www.zkoss.org/2005/zk/client"
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+ 		height="100%" sclass="yw-productdescriptionpopup">
+ 		
+	 	<label id="title" sclass="yw-productdescriptionpopup-title"/>
+        <label id="description" sclass="yw-productdescriptionpopup-subtitle">${labels.description}</label>
+        <div id="syncPopupButtons" sclass="yw-productdescriptionpopup-navigation">
+                <div sclass="yw-left-pack"/>
+                <div sclass="yw-right-pack">
+                    <div sclass="yw-component-wrapper">
+                        <button id="cancel" label="${labels.btn.cancel}">
+                            <custom-attributes ytestid="cancelBtn"/>
+                        </button>
+                    </div>
+                    <div sclass="yw-component-wrapper">
+                        <button id="generate" sclass="yw-btn-primary" label="${labels.btn.generate}">
+                            <custom-attributes ytestid="generateBtn"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+</widget>

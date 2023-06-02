@@ -13,6 +13,7 @@
     <sockets>
         <input id="inputProducts" type="java.util.List"/>
         <output id="startedProductDescriptionCronJob" type="java.lang.String"/>
+        <output id="cancel" type="java.lang.Object"/>
     </sockets>
 
     <controller class="com.chatgpt.backoffice.widgets.ProductDescriptionPopupController"/>

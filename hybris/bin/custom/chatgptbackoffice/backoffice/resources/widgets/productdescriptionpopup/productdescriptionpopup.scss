@@ -1,13 +1,76 @@
 @charset "utf-8";
-@import "./support/chatgptbackofficewidget-variables.scss";
+@import "./support/productdescriptionpopup-variables.scss";
 
-.yw-labelstyle
-{
-	color: $chatgptbackoffice-label-text-color;
+.yw-labelstyle {
+  color: $chatgptbackoffice-label-text-color;
 }
 
 .chatgptbackoffice-container {
-	background: $chatgptbackoffice-container-background;
-	font-family: $chatgptbackoffice-container-font-family;
-	font-size: $chatgptbackoffice-container-font-size;
+  background: $chatgptbackoffice-container-background;
+  font-family: $chatgptbackoffice-container-font-family;
+  font-size: $chatgptbackoffice-container-font-size;
+}
+
+.yw-productdescriptionpopup {
+	.z-tabs-content {
+		background: $_productdescriptionpopup__tabs--bg-color;
+	}
+
+	&-title{
+		font-size: $productdescriptionpopup__title--font-size;
+		padding: $productdescriptionpopup__title--padding;
+		display: block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	&-subtitle {
+		padding: $productdescriptionpopup__subtitle--padding;
+		display: $productdescriptionpopup__subtitle--display;
+	}
+	
+	&-navigation {
+		background: $productdescriptionpopup__navigation--bg-color;
+		height: $productdescriptionpopup__navigation--height;
+		border-top: $productdescriptionpopup__content-delimiter--border-top;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+
+		.yw-left-pack, .yw-right-pack {
+			padding: $productdescriptionpopup__navigation-pack--padding;
+			-webkit-box-flex: 1;
+			-ms-flex: 1 0 auto;
+			flex: 1 0 auto;
+			
+			&:empty {
+				display: none;
+			}
+			.yw-component-wrapper, 
+			.component-wrapper {
+				display: $productdescriptionpopup__navigation-component-wrapper--display;
+				padding: $productdescriptionpopup__navigation-component-wrapper--padding;
+			}
+		}
+
+		.yw-right-pack {
+			text-align: right;
+
+			.yw-component-wrapper + .yw-component-wrapper,
+			.component-wrapper + .component-wrapper {
+				padding-left: $productdescriptionpopup__navigation-pack-component-wrapper-sibling--padding;
+			}
+		}
+
+		.yw-left-pack {
+			.yw-component-wrapper + .yw-component-wrapper,
+			.component-wrapper + .component-wrapper {
+				padding-right: $productdescriptionpopup__navigation-pack-component-wrapper-sibling--padding;
+			}
+		}
+	}
 }

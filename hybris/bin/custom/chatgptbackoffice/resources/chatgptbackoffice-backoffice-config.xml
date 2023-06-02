@@ -31,6 +31,15 @@
 		</y:actions>
 	</context>
 	
+	<context type="Product" component="listview" merge-by="type" parent="auto">
+		<y:actions>
+			<y:group qualifier="common" position="10">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.chatgptbackoffice.actions.productdescriptionlist" property="currentObject" position="40" />
+			</y:group>
+		</y:actions>
+	</context>
+	
 	<!-- Notification Area-->
 	<context component="notification-area">
 		<na:notification-area>
@@ -52,6 +61,22 @@
 		<na:notification-area>
 			<na:notifications eventType="chatgpt.generate.product.description.list.validation.event" level="FAILURE">
 				<na:message>generate.product.description.list.validation.error</na:message>
+			</na:notifications>
+		</na:notification-area>
+	</context>
+	
+	<context component="notification-area" source="productdescriptionpopup" merge-by="source">
+		<na:notification-area>
+			<na:notifications eventType="jobStarted" level="SUCCESS">
+				<na:message>generate.product.description.popup.success</na:message>
+			</na:notifications>
+		</na:notification-area>
+	</context>
+	
+	<context component="notification-area" source="productdescriptionpopup" merge-by="source">
+		<na:notification-area>
+			<na:notifications eventType="jobNotStarted" level="FAILURE">
+				<na:message>generate.product.description.popup.failure</na:message>
 			</na:notifications>
 		</na:notification-area>
 	</context>

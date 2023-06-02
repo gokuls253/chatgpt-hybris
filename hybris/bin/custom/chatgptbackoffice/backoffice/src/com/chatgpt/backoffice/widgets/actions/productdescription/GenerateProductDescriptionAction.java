@@ -65,7 +65,11 @@ public class GenerateProductDescriptionAction implements CockpitAction<ProductMo
 
 	public boolean canPerform(final ActionContext<ProductModel> productActionContext)
 	{
-		return true;
+		if (productActionContext.getData() != null)
+		{
+			return true;
+		}
+		return false;
 	}
 
 }

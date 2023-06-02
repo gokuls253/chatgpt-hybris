@@ -40,9 +40,23 @@ public class GenerateProductDescriptionListAction extends AbstractComponentWidge
 	@Resource(name = "notificationService")
 	private NotificationService notificationService;
 
+	@Override
 	public boolean canPerform(final ActionContext<Object> ctx)
 	{
-		return true;
+		if (ctx.getData() != null)
+		{
+			final List<Object> data = getData(ctx);
+			if (data.size() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+		return false;
 	}
 
 	@Override

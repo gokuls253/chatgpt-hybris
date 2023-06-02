@@ -3,3 +3,94 @@ $chatgptbackoffice-container-background: var(--bo-base-background);
 $chatgptbackoffice-container-font-family: var(--bo-font-family);
 $chatgptbackoffice-container-font-size: $font-size__base;
 $chatgptbackoffice-label-text-color: var(--bo-text-color);
+
+@import "cockpitng-globals.scss";
+// $productdescriptionpopup__icons-folder-path: "../../cng/images/sync/";
+$productdescriptionpopup__icons-font-family: $font-family__icon;
+$productdescriptionpopup__icons-font-size: $font-size__large;
+$productdescriptionpopup__input-placeholder--icon-content: _getIconGlyphContentValue("search");
+// $productdescriptionpopup__input-placeholder--bg-image: url(#{$productdescriptionpopup__icons-folder-path + "icon-search-sync.png"});
+$productdescriptionpopup__input-placeholder--bg-repeat: no-repeat;
+$productdescriptionpopup__input-placeholder--bg-position: center;
+$productdescriptionpopup__input-placeholder--bg-size: $form-defaults__input-icon--size $form-defaults__input-icon--size;
+$productdescriptionpopup__input-placeholder--width: $form-defaults__input-icon--size;
+$productdescriptionpopup__input-placeholder--height: $form-defaults__input-icon--size;
+$productdescriptionpopup__input-placeholder--color: var(--bo-placeholder-text-color);
+$productdescriptionpopup__input-placeholder--text-indent: -9999px;
+
+$productdescriptionpopup__window-header--padding-bottom: 0;
+$productdescriptionpopup__window-header-caption--min-height: 0;
+
+$_productdescriptionpopup__content-side--spacing: $_container-spacing-default__small;
+
+$productdescriptionpopup__title--font-size: $font-size__large;
+$productdescriptionpopup__title--padding: 0 ($toolbar__button-medium--size + $_productdescriptionpopup__content-side--spacing + $_container-spacing-default__tiny) $_container-spacing-default__tiny $_container-spacing-default__small;
+$_productdescriptionpopup__title--font-weight: $font-weight-bold;
+
+$productdescriptionpopup__subtitle--padding: $_container-spacing-default__tiny $_productdescriptionpopup__content-side--spacing;
+$productdescriptionpopup__subtitle--display: block;
+
+$productdescriptionpopup__textbox-holder--padding: $_container-spacing-default__tiny $_productdescriptionpopup__content-side--spacing;
+$productdescriptionpopup__textbox-holder--margin: 0 auto;
+$productdescriptionpopup__textbox--margin: $_container-spacing-default__small 0;
+
+$productdescriptionpopup__bold-label--font-size: $font-size__large;
+$productdescriptionpopup__bold-label--font-weight: $font-weight-bold;
+
+$productdescriptionpopup__label--padding-left: 0;//floor($_productdescriptionpopup__content-side--spacing/2);
+
+$productdescriptionpopup__cell-icon--width: ($toolbar__button-medium--size + $_container-spacing-default__tiny);
+$productdescriptionpopup__cell-icon--text-align: center;
+
+$productdescriptionpopup__icons--width: $toolbar__button-small--size;
+$productdescriptionpopup__icons--height: $toolbar__button-small--size;
+$productdescriptionpopup__icons-display: inline-block;
+
+$productdescriptionpopup__icons-push--bg-font-size: $font-family__icon;
+$productdescriptionpopup__icons-push--bg-font-family: $font-family__icon;
+
+$productdescriptionpopup__icons--bg-repeat: no-repeat;
+$productdescriptionpopup__icons--bg-position: center;
+$productdescriptionpopup__icons--bg-size: $toolbar__button-small--size $toolbar__button-small--size;
+
+$productdescriptionpopup__content-delimiter--border-color: $_editor-defaults__popup-box-delimiter--border-color;
+$productdescriptionpopup__content-delimiter--border-top: $boxes--border__thin solid $productdescriptionpopup__content-delimiter--border-color;
+
+$productdescriptionpopup__navigation--bg-color: var(--bo-page-footer-background);
+$productdescriptionpopup__navigation--height: $editor-defaults__inline-box--height + 2* $_container-spacing-default__small; //button-height + 2* padding (top/bottom)
+$productdescriptionpopup__navigation-pack--padding: ceil($_productdescriptionpopup__content-side--spacing/2);
+
+$productdescriptionpopup__navigation-component-wrapper--display: inline-block;
+$productdescriptionpopup__navigation-component-wrapper--padding: floor($_productdescriptionpopup__content-side--spacing/2);
+
+$productdescriptionpopup__navigation-pack-right-component-wrapper--position: absolute;
+$productdescriptionpopup__navigation-pack-right-component-wrapper--right: 0;
+$productdescriptionpopup__navigation-pack-right-component-wrapper--top: 0;
+$productdescriptionpopup__navigation-pack-component-wrapper-sibling--padding: 0;
+
+$productdescriptionpopup__tabpanel--max-height: 305px;
+$productdescriptionpopup__tabpanel--overflow: auto;
+$productdescriptionpopup__tabpanel--padding: 0;
+$productdescriptionpopup__tabpanel--border: none;
+
+$_productdescriptionpopup__tabs--bg-color: var(--bo-list-group-header-background);
+
+$productdescriptionpopup__tab--width: auto; //50%;
+$productdescriptionpopup__tab--padding: 0 $_productdescriptionpopup__content-side--spacing;
+
+$productdescriptionpopup__tab--height: 15px;
+$productdescriptionpopup__tab--content: '';
+$productdescriptionpopup__tab--float: left;
+$productdescriptionpopup__tab--border-left: false; //$boxes--border__thin solid $grey__light--1100;
+$productdescriptionpopup__tab--margin-left: $_productdescriptionpopup__content-side--spacing * -1;
+
+$productdescriptionpopup__tab-text--font-size: $font-size__base;
+$productdescriptionpopup__tab-text--font-weight: $font-weight-normal;
+$productdescriptionpopup__tab-text--padding-bottom: $_container-spacing-default__tiny;
+
+$_productdescriptionpopup__listcell-content--padding-right: floor($_productdescriptionpopup__content-side--spacing/2);
+$_productdescriptionpopup__listcell-content--padding-left: floor($_productdescriptionpopup__content-side--spacing/2);
+$_productdescriptionpopup__listitem--padding-x: ceil($_productdescriptionpopup__content-side--spacing/2);
+
+$productdescriptionpopup__btn-primary--width: 110px;
+
