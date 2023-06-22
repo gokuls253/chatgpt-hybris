@@ -31,11 +31,20 @@
 		</y:actions>
 	</context>
 	
-	<context type="Product" component="listview" merge-by="type" parent="auto">
+	<context type="Product" component="listviewactions" merge-by="type">
 		<y:actions>
 			<y:group qualifier="common" position="10">
 				<y:label>actiongroup.common</y:label>
-				<y:action action-id="com.chatgptbackoffice.actions.productdescriptionlist" property="currentObject" position="40" />
+				<y:action action-id="com.chatgptbackoffice.actions.productdescriptionlist" property="selectedObjects" position="40" />
+			</y:group>
+		</y:actions>
+	</context>
+	
+	<context type="Product" component="pcmbackoffice-listviewactions" merge-by="type">
+		<y:actions>
+			<y:group qualifier="common" position="10">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.chatgptbackoffice.actions.productdescriptionlist" property="selectedObjects" position="60" />
 			</y:group>
 		</y:actions>
 	</context>

@@ -13,17 +13,17 @@
                    id="com.chatgptbackoffice.actions.productdescriptionlist"
                    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
 
+    <sockets>
+        <output id="currentProducts" type="java.util.List"/>
+    </sockets>
+    
     <name>Generate Product Description</name>
     <description>Generate Product Description</description>
     <author>hybris</author>
     <version>0.1</version>
    
-    <actionClassName>com.chatgpt.backoffice.widgets.actions.productdescription.GenerateProductDescriptionListAction</actionClassName>
-    
-    <sockets>
-        <output id="currentProducts" type="java.util.List"/>
-    </sockets>
-
     <iconUri>icons/icon_action_chatgpt_default.png</iconUri>
+    
+    <actionClassName>com.chatgpt.backoffice.widgets.actions.productdescription.GenerateProductDescriptionListAction</actionClassName>
 
 </action-definition>
